@@ -8,5 +8,44 @@ formulario.addEventListener('submit' , registro);
 
 function registro(e){
     e.preventDefault();
-    console.log('entra a funcion ');
+
+
+    let nombreVal = nombre.value;
+    let emailVal = email.value;
+    let userVal = user.value;
+    let passVal = pass.value;
+
+if(nombreVal == '' || emailVal == '' || userVal == '' || passVal == ''){
+    return;
+    creaMensaje('verifica tus campos', 'danger');
+}
+
+const usuario  = {
+    nombre: nombreVal,
+    email: emailVal,
+    user: userVal,
+    pass: passValue
+}
+   
+localStorage.setItem('usuario' , JSON.stringify(usuario));
+
+nombre.value = '';
+email.value = '';
+user.value = '';
+pass.value = '';
+
+creaMensaje('Usuario Registrado!' , 'success');
+
+
+}
+
+function creaMensaje(texto, tipo){
+    const nuevoElemento = document.createElement('div');
+    nuevoElemento.innterText = texto;
+    nuevoElemento.classList.add('alert','alert-' + tipo);
+    const divMensaje = document.getElementById('mensaje');
+    divMensaje.appendChild(nuevoElemento);
+    setTimeout(function(){
+     nuevoElemento.remove();
+    }, 2000);
 }
